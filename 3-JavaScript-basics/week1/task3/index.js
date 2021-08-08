@@ -1,3 +1,6 @@
+const HOURS_PER_DAY = 24
+const MINUTES_PER_HOUR = 60
+
 /**
  * @param {Number} hours
  * @param {Number} minutes
@@ -5,20 +8,20 @@
  * @returns {String}
  */
 module.exports = function (hours, minutes, interval) {
-	let correctHours = hours
-	let correctMinutes = minutes + interval
+	minutes += interval
 
-	while (correctMinutes >= 60) {
-		correctMinutes -= 60
-		correctHours += 1
+	hours += Math.floor(minutes / MINUTES_PER_HOUR)
+
+	minutes %= MINUTES_PER_HOUR
+	hours %= HOURS_PER_DAY
+
+	if (hours < 10) {
+		hours = '0' + hours
 	}
 
-	while (correctHours >= 24) {
-		correctHours -= 24
+	if (minutes < 10) {
+		minutes = '0' + minutes
 	}
 
-	let outputHours = correctHours > 9 ? correctHours : '0' + correctHours
-	let outputMinutes = correctMinutes > 9 ? correctMinutes : '0' + correctMinutes
-
-	return outputHours + ':' + outputMinutes
+	return hours + ':' + minutes
 }
