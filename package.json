@@ -1,0 +1,22 @@
+{
+  "name": "coursera-yandex-frontend",
+  "version": "1.0.0",
+  "description": "Материалы и решения задач специализации \"Разработка интерфейсов: вёрстка и JavaScript\" от МФТИ и Яндекса, платформа Coursera",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisstasyev/coursera-yandex-frontend.git"
+  },
+  "author": "Denis Stasyev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denisstasyev/coursera-yandex-frontend/issues"
+  },
+  "homepage": "https://github.com/denisstasyev/coursera-yandex-frontend#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}
