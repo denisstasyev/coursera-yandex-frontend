@@ -6,14 +6,16 @@
 function query(collection, ...operations) {
 	let result = [...collection]
 
-	const filterInOperations = operations.filter(operation => operation.type === 'filterIn')
-	const selectOperations = operations.filter(operation => operation.type === 'select')
+	const filterInOperations = operations.filter(
+		operation => operation.name === 'filterInOperation',
+	)
+	const selectOperations = operations.filter(operation => operation.name === 'selectOperation')
 
 	filterInOperations.forEach(operation => {
-		result = result.filter(operation.fn)
+		result = result.filter(operation)
 	})
 	selectOperations.forEach(operation => {
-		result = result.map(operation.fn)
+		result = result.map(operation)
 	})
 
 	return result
@@ -23,21 +25,18 @@ function query(collection, ...operations) {
  * @params {String[]}
  */
 function select(...args) {
-	return {
-		type: 'select',
-		fn(item) {
-			const selectItem = {}
+	return function selectOperation(item) {
+		const selectItem = {}
 
-			args.forEach(key => {
-				const value = item[key]
+		args.forEach(key => {
+			const value = item[key]
 
-				if (value) {
-					selectItem[key] = value
-				}
-			})
+			if (value) {
+				selectItem[key] = value
+			}
+		})
 
-			return selectItem
-		},
+		return selectItem
 	}
 }
 
@@ -46,11 +45,8 @@ function select(...args) {
  * @param {Array} values – Массив разрешённых значений
  */
 function filterIn(property, values) {
-	return {
-		type: 'filterIn',
-		fn(item) {
-			return values.includes(item[property])
-		},
+	return function filterInOperation(item) {
+		return values.includes(item[property])
 	}
 }
 
