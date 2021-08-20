@@ -3,17 +3,18 @@
  * @param {Function} callback
  */
 module.exports = function (operations, callback) {
-	const operationsData = []
-
 	if (!operations.length) {
 		callback(null, [])
 	}
 
+	const operationsData = []
+	let hasError = false
+
 	operations.forEach((operation, index) => {
 		const next = (error, data) => {
 			if (error) {
-				callback(error)
-				return
+				!hasError && callback(error)
+				hasError = true
 			} else {
 				// operationsData.push(data) - для сохранения порядка НЕ вызовов, а ответов
 				operationsData[index] = data

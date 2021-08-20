@@ -2,7 +2,7 @@ var assert = require('assert')
 var parallel = require('./index')
 
 // Вспомогательная функция для тестов
-var tests = 3
+var tests = 4
 function completeTest() {
 	tests--
 
@@ -88,3 +88,35 @@ parallel([], function (errors, result) {
 
 	completeTest()
 })
+
+// Пример, когда несколько из операций завершается ошибкой
+parallel(
+	[
+		// Операция, которая выполняется 500ms
+		function (next) {
+			setTimeout(function () {
+				next(null, '500ms')
+			}, 500)
+		},
+
+		// Операция, которая завершается с ошибкой через 10ms
+		function (next) {
+			setTimeout(function () {
+				next('ERROR')
+			}, 10)
+		},
+
+		// Операция, которая выполняется 200ms
+		function (next) {
+			setTimeout(function () {
+				next('ERROR')
+			}, 200)
+		},
+	],
+	function (error, results) {
+		assert.deepEqual(error, 'ERROR')
+		assert.equal(results, null)
+
+		completeTest()
+	},
+)
