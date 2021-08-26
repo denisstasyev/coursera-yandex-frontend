@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Анимация</title>
+		<style>
+			.animation {
+				width: 150px;
+				height: 150px;
+				background-color: #f00;
+
+				animation: transformation 3s infinite alternate linear;
+				transition: background-color 500ms linear;
+			}
+
+			.animation:hover {
+				background-color: #ff0;
+			}
+
+			@keyframes transformation {
+				0% {
+					transform: translateX(0);
+				}
+				25% {
+					transform: translateX(100px);
+				}
+				50% {
+					transform: translateX(100px) translateY(100%);
+				}
+				75%,
+				100% {
+					transform: translateX(100px) translateY(100%) scale(2) rotate(145deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="animation"></div>
+	</body>
+</html>
