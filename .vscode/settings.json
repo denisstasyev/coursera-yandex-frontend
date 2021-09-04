@@ -5,4 +5,7 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "workbench.tree.indent": 18,
+    "editor.renderWhitespace": "boundary",
+    "editor.fontSize": 12,
 }
