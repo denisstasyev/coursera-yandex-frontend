@@ -18,5 +18,8 @@
   "homepage": "https://github.com/denisstasyev/coursera-yandex-frontend#readme",
   "devDependencies": {
     "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
   }
 }
